@@ -22,19 +22,19 @@ potta init --mcu stm32f411ve --compiler gcc  # Core is known from the MCU
 Minimal files created:
 ```
 include/
-  mcu.h.j2
+  mcu.h.jinja
   mcu.svd
 src/
   main.c
 SConstruct
 custom.py
-layout.ld.j2
-startup.S.j2
+layout.ld.jinja
+startup.S.jinja
 ```
 
 Build:
 ```bash
-scons
+scons  # Will generate mcu.h, layout.ld and startup.S
 ```
 
 ---
