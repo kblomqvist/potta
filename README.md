@@ -24,21 +24,22 @@ potta diff   # compares local modifications to interweb versions
 
 Minimal set of files created:
 ```
-.potta.conf
-include/
-  mcu.h.jinja
-  mcu.svd
-src/
-  main.c
-SConstruct
-custom.py
-layout.ld.jinja
-startup.S.jinja
+.
++-- target/
+|   +-- SConscript
+|   +-- target.h.jinja
+|   +-- layout.ld.jinja
+|   +-- startup.c.jinja
+|   +-- target.svd
++-- my_project/
+|   +-- SConscript
++-- SConstruct
++-- build.py                            <-- contains potta.conf stuff?
 ```
 
 Build:
 ```bash
-scons  # Will generate mcu.h, layout.ld and startup.S
+scons
 ```
 
 ---
@@ -65,11 +66,13 @@ will lead to the following project structure
 ```
 .
 +-- target/
+|   +-- SConscript
 |   +-- target.h.jinja
 |   +-- layout.ld.jinja
 |   +-- startup.c.jinja
 |   +-- target.svd
 +-- proj/
+|   +-- SConscript
 +-- SConstruct
 +-- build.py                            <-- contains potta.conf stuff?
 ```
@@ -91,11 +94,13 @@ The project structure now looks like this
 ```
 .
 +-- target/
+|   +-- SConscript
 |   +-- target.h.jinja
 |   +-- layout.ld.jinja
 |   +-- startup.c.jinja
 |   +-- target.svd
 +-- proj/
+|   +-- SConscript
 |   +-- main.c
 +-- SConstruct
 +-- build.py
@@ -128,6 +133,7 @@ The build is made into separate build folder (maybe with SCons duplicate=True):
 |       +-- proj.elf
 |       +-- proj.hex
 +-- target/
+|   +-- SConscript
 |   +-- target.h
 |   +-- target.h.jinja
 |   +-- layout.ld
@@ -136,6 +142,7 @@ The build is made into separate build folder (maybe with SCons duplicate=True):
 |   +-- startup.c.jinja
 |   +-- target.svd
 +-- proj/
+|   +-- SConscript
 |   +-- main.c
 +-- SConstruct
 +-- build.py
@@ -144,3 +151,4 @@ The build is made into separate build folder (maybe with SCons duplicate=True):
 # Brainstorm
 
 - Do we need both assembly and C startups, or could we make all in C file with inline assembly.
+- In Moe there was SConscript files in separate dirs so maybe add here too. Also see, http://stackoverflow.com/questions/15411176/do-we-need-sconscript-file-in-every-source-directory.
