@@ -71,18 +71,19 @@ potta init --target stm32f411ve
 will lead to the following project structure
 ```bash
 .
-+-- proj
++-- target/
 |   +-- target.h.jinja
 |   +-- target.ld.jinja
 |   +-- target.s.jinja
 |   +-- target.svd
++-- proj/
 +-- SConstruct
 +-- build.py
 ```
 
 John starts to write the main function into `proj/main.c`.
 ```c
-#include "target.h"
+#include <target/target.h>              // By default the root of the proj is put into include path
 
 int main() {
     RCC->AHBENR |= RCC_AHBENR_GPIOCEN;  // Enable clocks for GPIOC
