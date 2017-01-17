@@ -67,7 +67,7 @@ will lead to the following project structure
 +-- target/
 |   +-- target.h.jinja
 |   +-- layout.ld.jinja
-|   +-- startup.s.jinja
+|   +-- startup.c.jinja
 |   +-- target.svd
 +-- proj/
 +-- SConstruct
@@ -92,8 +92,8 @@ The project structure now looks like this
 .
 +-- target/
 |   +-- target.h.jinja
-|   +-- target.ld.jinja
-|   +-- target.s.jinja
+|   +-- layout.ld.jinja
+|   +-- startup.c.jinja
 |   +-- target.svd
 +-- proj/
 |   +-- main.c
@@ -115,21 +115,32 @@ To build the project SCons is directly used:
 scons
 ```
 
-The build is made into separate build folder (with SCons duplicate=True):
+The build is made into separate build folder (maybe with SCons duplicate=True):
 ```
 .
 +-- _build/
 |   +-- cmsis/
 |       +-- objects.o
+|   +-- target/
+|       + startup.o
 |   +-- proj/
 |       +-- main.o
+|       +-- proj.elf
+|       +-- proj.hex
 +-- target/
+|   +-- target.h
 |   +-- target.h.jinja
-|   +-- target.ld.jinja
-|   +-- target.s.jinja
+|   +-- layout.ld
+|   +-- layout.ld.jinja
+|   +-- startup.c
+|   +-- startup.c.jinja
 |   +-- target.svd
 +-- proj/
 |   +-- main.c
 +-- SConstruct
 +-- build.py
 ```
+
+# Brainstorm
+
+- Do we need both assembly and C startups, or could we make all in C file with inline assembly.
