@@ -65,17 +65,17 @@ cd workspace/proj
 
 The project initialization
 ```bash
-potta init
+potta init --target stm32f411ve
 ```
 
 will lead to the following project structure
 ```bash
 .
 +-- proj
-    +-- target.h.jinja
-    +-- target.ld.jinja
-    +-- target.s.jinja
-    +-- target.svd
+|   +-- target.h.jinja
+|   +-- target.ld.jinja
+|   +-- target.s.jinja
+|   +-- target.svd
 +-- SConstruct
 +-- build.py
 ```
@@ -89,6 +89,7 @@ int main() {
     GPIOC->MODER |= (1<<16);            // Define PC08 as output
     GPIOC->BSRR = (1<<8);               // Make PC08 high
     while(1);
+    // See, http://hertaville.com/stm32f0-gpio-tutorial-part-1.html
 }
 ```
 
