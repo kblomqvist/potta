@@ -52,3 +52,44 @@ scons  # Will generate mcu.h, layout.ld and startup.S
 ---
 
 Some files could also be put into `~/.potta`.
+
+# User story
+
+John Doe wants to start developing for STM32F411VE (ARM CM4 core). For start he wants the minimal repo to blink an LED by bitbanging the peripheral register. John already has Potta installed (with default values).
+
+First create project folder:
+```
+mkdir workspace/proj
+cd workspace/proj
+```
+
+The project initialization
+```bash
+potta init
+```
+
+will lead to the following project structure
+```bash
+.
++-- proj
+    +-- target.h.jinja
+    +-- target.ld.jinja
+    +-- target.s.jinja
+    +-- target.svd
++-- SConstruct
++-- build.py
+```
+
+John starts to write the main function into `proj/main.c`.
+```c
+#include "target.h"
+
+int main() {
+    RCC->AHBENR |= RCC_AHBENR_GPIOCEN;  // Enable clocks for GPIOC
+    GPIOC->MODER |= (1<<16);            // Define PC08 as output
+    GPIOC->BSRR = (1<<8);               // Make PC08 high
+    while(1);
+}
+```
+
+John would like to switch to IDE (without building the project yet). He imports the project to Eclipse by using import SCons project, and sees that there's an error showing that `target.h` does not exists. Well John needs to build to get that file.
