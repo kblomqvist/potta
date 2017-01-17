@@ -12,14 +12,6 @@ cd my_project
 ```
 
 ```bash
-potta init --core arm_cm4 --compiler gcc --stl no
-```
-
-```bash
-potta init --mcu stm32f411ve --compiler gcc  # Core is known from the MCU
-```
-
-```bash
 potta init   # initialize project with default values (from ~/.potta)
 potta set --target stm32f411ve # update .potta.conf
 potta set --compiler gcc
@@ -65,7 +57,8 @@ cd workspace/proj
 
 The project initialization
 ```bash
-potta init --target stm32f411ve
+potta init
+potta set --target stm32f411ve
 ```
 
 will lead to the following project structure
@@ -73,12 +66,12 @@ will lead to the following project structure
 .
 +-- target/
 |   +-- target.h.jinja
-|   +-- target.ld.jinja
-|   +-- target.s.jinja
+|   +-- layout.ld.jinja
+|   +-- startup.s.jinja
 |   +-- target.svd
 +-- proj/
 +-- SConstruct
-+-- build.py
++-- build.py                            <-- contains potta.conf stuff?
 ```
 
 John starts to write the main function into `proj/main.c`.
