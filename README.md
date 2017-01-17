@@ -69,7 +69,7 @@ potta init --target stm32f411ve
 ```
 
 will lead to the following project structure
-```bash
+```
 .
 +-- target/
 |   +-- target.h.jinja
@@ -94,4 +94,49 @@ int main() {
 }
 ```
 
+The project structure now looks like this
+```
+.
++-- target/
+|   +-- target.h.jinja
+|   +-- target.ld.jinja
+|   +-- target.s.jinja
+|   +-- target.svd
++-- proj/
+|   +-- main.c
++-- SConstruct
++-- build.py
+```
+
 John would like to switch to IDE (without building the project yet). He imports the project to Eclipse by using import SCons project, and sees that there's an error showing that `target.h` does not exists. Well John needs to build to get that file.
+
+Now John would like to hack with NVICs. He knows that CMSIS could help with that so John decides to install CMSIS.
+```bash
+potta grab cmsis
+```
+
+The above command git clones cmsis botta package into `~/.potta/cmsis` if not yet there, and updates the `build.py` accordingly to get the package build and linked into the proj.
+
+To build the project SCons is directly used:
+```bash
+scons
+```
+
+The build is made into separate build folder (with SCons duplicate=True):
+```
+.
++-- _build/
+|   +-- cmsis/
+|       +-- objects.o
+|   +-- proj/
+|       +-- main.o
++-- target/
+|   +-- target.h.jinja
+|   +-- target.ld.jinja
+|   +-- target.s.jinja
+|   +-- target.svd
++-- proj/
+|   +-- main.c
++-- SConstruct
++-- build.py
+```
