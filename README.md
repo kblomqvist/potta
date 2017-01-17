@@ -105,10 +105,10 @@ John would like to switch to IDE (without building the project yet). He imports 
 
 Now John would like to hack with NVICs. He knows that CMSIS could help with that so John decides to install CMSIS.
 ```bash
-potta grab cmsis
+potta add --package cmsis
 ```
 
-The above command git clones cmsis botta package into `~/.potta/cmsis` if not yet there, and updates the `build.py` accordingly to get the package build and linked into the proj.
+The above command git clones cmsis botta package into `~/.potta/cmsis/` folder if not yet there, and updates the `build.py` accordingly to get the package build and linked into the proj.
 
 To build the project SCons is directly used:
 ```bash
@@ -118,7 +118,7 @@ scons
 The build is made into separate build folder (maybe with SCons duplicate=True):
 ```
 .
-+-- _build/
++-- build/
 |   +-- cmsis/
 |       +-- objects.o
 |   +-- target/
