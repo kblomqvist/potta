@@ -11,13 +11,18 @@ mkdir my_project
 cd my_project
 ```
 
+First decide which tools to use and make set those to default:
 ```bash
-potta init   # initialize project with default values (from ~/.potta)
-potta set --target stm32f411ve # update .potta.conf
+potta set --global programmer=openocd  # update .potta.conf and also ~/.potta/defaults.json
+potta set --global toolchain_path=`which arm-none-eabi-gcc`
+```
+
+Next init the project:
+```bash
+potta init                             # initialize project with default values (from ~/.potta/defaults.json)
+potta set target=stm32f411ve           # update .potta.conf
 potta set --compiler gcc
-potta set --global --programmer openocd  # update .potta.conf and also ~/.potta
-potta set --compiler_path /path/gcc-arm-4.7.0 --linker-path /path/ld-arm-4.7.0
-potta set --lang cpp
+potta set lang=cpp
 potta fetch  # fetches appropriate files from interweb (*.jinja, *.svd)
 potta diff   # compares local modifications to interweb versions
 ```
@@ -31,7 +36,7 @@ Minimal set of files created:
 |   +-- layout.ld.jinja
 |   +-- startup.c.jinja
 |   +-- target.svd
-+-- my_project/
++-- my_project/                         <-- potta reads the basename of the cwd and use that here
 |   +-- SConscript
 +-- SConstruct
 +-- build.py                            <-- contains potta.conf stuff?
