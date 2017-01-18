@@ -19,12 +19,11 @@ potta set --global toolchain_path=`which arm-none-eabi-gcc`
 
 Next init the project:
 ```bash
-potta init                             # initialize project with default values (from ~/.potta/defaults.json)
-potta set target=stm32f411ve           # update .potta.conf
-potta set --compiler gcc
+potta init                              # initialize project with default values (from ~/.potta/defaults.json)
+potta set target=stm32f411ve            # update .potta.conf
 potta set lang=cpp
-potta fetch  # fetches appropriate files from interweb (*.jinja, *.svd)
-potta diff   # compares local modifications to interweb versions
+potta fetch                             # fetches appropriate files from interweb (*.jinja, *.svd)
+potta diff                              # compares local modifications to interweb versions
 ```
 
 Minimal set of files created:
