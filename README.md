@@ -154,5 +154,20 @@ The build is made into separate build folder (maybe with SCons duplicate=True):
 
 # Brainstorm
 
-- Do we need both assembly and C startups, or could we make all in C file with inline assembly.
-- In Moe there was SConscript files in separate dirs so maybe add here too. Also see, http://stackoverflow.com/questions/15411176/do-we-need-sconscript-file-in-every-source-directory.
+Do we need both assembly and C startups, or could we make all in C file with inline assembly.
+
+In Moe there was SConscript files in separate dirs so maybe add here too. Also see, http://stackoverflow.com/questions/15411176/do-we-need-sconscript-file-in-every-source-directory.
+
+## Works as Python virtualenv
+
+```bash
+potta venv foobar [--location ~/.potta]
+```
+
+## Package overlaying
+
+```bash
+potta overlay pkg [file(s)]
+```
+
+If files are not given will copy the whole package into current project folder. In other case the folder is created with the given files copied there. Also generates the SConscript to decide which files are compiled from project and which are from the original package.
